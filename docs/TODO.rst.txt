@@ -1,0 +1,19 @@
+TODO
+====
+
+Along with TODOs that can be found directly in the source file.
+Here's TODOs that is in higher-level abstraction.
+
+* Fix ``README.rst.txt``.
+  There's so many big changes in the last revisions.
+
+* Add test for ``blowgun::Texture`` and ``blowgun::Program``.
+  Hint: the test will contain call to ``glIsTexture`` for ``blowgun::Texture``
+  and ``glIsProgram`` for ``blowgun::Program``.
+
+* The way vertex uploading designed is not optimal because too many overhead.
+  Every vertex attribute contains ``type``, ``format``, and ``data``.
+
+* Data-oriented-ify vertex data.
+  The work for this has been started in ``vertices.h``
+  and ``vertices_builder.h``.

@@ -1,0 +1,45 @@
+Vertex Layout Mismatch
+======================
+
+According to OpenGL ES 2 Programming Guide book, the most efficient way to store a collection of vertices attribute is array of structures. The reason, the book says,
+
+	".. is that the attribute data for each vertex can be read in sequential fashion and so will most likely result in an efficient memory access pattern."
+
+To get better description of what an array of structures look like, let's use an example. Suppose that there are two attributes for each vertex: vertex position (``vp``) and vertex color (``vc``), here's a simplified visualization how it is stored in memory:
+
++-----+-----+-----+-----+-----+-----+
+| vp0 | vc0 | vp1 | vc1 | vp2 | vc2 |
++-----+-----+-----+-----+-----+-----+
+
+However, some 3D model file formats use structure of arrays instead of array of structures. Wavefile OBJ file, for example, will store 3 vertices attributes above as:
+
++-----+-----+-----+-----+-----+-----+
+| vp0 | vp1 | vp2 | vc0 | vc1 | vc2 |
++-----+-----+-----+-----+-----+-----+
+
+As we can see, there's a mismatch between those two representations of vertices attributes. A good graphics library have to address this mismatch.
+
+One solution to address this issue is to determine the vertex layout at runtime using builder pattern. For the above case, the vertex layout can be defined as follow: ::
+
+	VertexAttributeLayout val = VertexAttributeLayout::BuildNew()
+		.AddAttribute(VertexAttributeType::POSITION, VertexAttributeData::FLOAT_3)
+		.AddAttribute(VertexAttributeType::COLOR, VertexAttributeData::FLOAT_3)
+		.GetResult();
+
+After the vertex layout information (i.e. ``val``) has been created, it can be attached onto an instance of ``ModelBuilder``. ``ModelBuilder``, in turns, can use this information as a guidance to place the vertices data accordingly regardless the data ordering of vertex in the 3D model file. This will enable user to use this kind of code: ::
+
+	ModelBuilder mb = new ModelBuilder();
+
+	// Notice that the order is 0, 2, then back to 1.
+	mb.AddVertex(0, VertexAttributeType::POSITION, vp0);
+	mb.AddVertex(2, VertexAttributeType::POSITION, vp2);
+	mb.AddVertex(1, VertexAttributeType::POSITION, vp1);
+
+	// Notice that the order is 1, back to 0, then 2.
+	mb.AddVertex(1, VertexAttributeType::COLOR, vc1);
+	mb.AddVertex(0, VertexAttributeType::COLOR, vc0);
+	mb.AddVertex(2, VertexAttributeType::COLOR, vc2);
+
+	Model m = mb.Build();
+
+Although the insertion order of vertex definitions seems jumbled, by using the method described above ``m`` will have effective vertices data layout underneath.
