@@ -34,6 +34,7 @@ Linux
 ~~~~~
 
 On Linux, Blowgun is tested working using:
+
 * GCC 4.7
 * Clang 3.1
 
