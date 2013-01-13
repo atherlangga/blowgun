@@ -88,7 +88,7 @@ ModelLoaderOBJ::Load(std::istream & stream)
                 // Found 'f'. It means "face" information is found.
                 // So, we're gonna construct complete set of vertex
                 // attributes. By the time execution goes to this
-                // point, all vertex attributes HAS to be parsed.
+                // point, all vertex attributes has had to be parsed.
                 // Sample:
                 // f 1/1 2/2 3/3
                 std::string face_entry;
@@ -117,7 +117,7 @@ ModelLoaderOBJ::Load(std::istream & stream)
                         // If the element count is 3, then it means the
                         // face contains position, normal, and texcoord.
                         // For now, we only need position and texcoord,
-                        // which means we need took first and third
+                        // which means we need to take first and third
                         // indices.
                         vertex_mapping = std::make_tuple(indices[0], indices[2]);
                     }
