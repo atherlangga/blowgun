@@ -4,7 +4,7 @@
 
 cmake_minimum_required (VERSION 2.8.7)
 
-project (Blowgun)
+project (blowgun)
 
 # Set CMake behavior
 # Here's what cmake says about CMP0015:
@@ -313,7 +313,7 @@ add_dependencies (os_bootstrap static_resources_files)
 # Set the final output filename to be more descriptive.
 # By default, the final output name is "os_bootstrap", which doesn't
 # describe itself very well.
-set (SAMPLE_APP_NAME "${PROJECT_NAME}Sample")
+set (SAMPLE_APP_NAME "${PROJECT_NAME}_sampleapp")
 set_target_properties (os_bootstrap PROPERTIES OUTPUT_NAME ${SAMPLE_APP_NAME})
 
 file (GLOB_RECURSE os_bootstrap_files "resources/code/os_bootstrap/*")
@@ -365,7 +365,7 @@ if (GTEST_FOUND)
     include_directories (${GTEST_INCLUDE_DIRS})
 
     file (GLOB_RECURSE blowgun_test_files "resources/code/libs/blowgun/*_test.c*")
-    set (TEST_APP_NAME "${PROJECT_NAME}Test")
+    set (TEST_APP_NAME "${PROJECT_NAME}_testrunner")
     add_executable (${TEST_APP_NAME} ${blowgun_test_files})
     target_link_libraries(${TEST_APP_NAME} blowgun ${GTEST_BOTH_LIBRARIES})
 endif (GTEST_FOUND)
