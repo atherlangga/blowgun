@@ -4,9 +4,6 @@ TODO
 Along with TODOs that can be found directly in the source file.
 Here's TODOs that is in higher-level abstraction.
 
-* Fix ``README.rst.txt``.
-  There's so many big changes in the last revisions.
-
 * Add test for ``blowgun::Texture`` and ``blowgun::Program``.
   Hint: the test will contain call to ``glIsTexture`` for ``blowgun::Texture``
   and ``glIsProgram`` for ``blowgun::Program``.
