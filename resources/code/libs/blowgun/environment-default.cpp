@@ -114,10 +114,8 @@ blowgun::CreateEnvironmentDefault(
         EGL_NATIVE_VISUAL_ID, &format);
     ANativeWindow_setBuffersGeometry(native_interface->window,
         0, 0, format);
-    auto egl_native_window = native_interface->window;
-#else
-    auto egl_native_window = native_interface->window;
 #endif
+    auto egl_native_window = native_interface->window;
 
     egl_surface = eglCreateWindowSurface(egl_display, egl_config,
         egl_native_window, NULL);
