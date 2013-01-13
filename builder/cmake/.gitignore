@@ -1,0 +1,9 @@
+# Ignore everything in this directory ..
+*
+
+# .. Except for this .gitignore ..
+!.gitignore
+
+# .. And all non-generated CMake related files.
+!*.cmake
+!CMakeLists.txt
