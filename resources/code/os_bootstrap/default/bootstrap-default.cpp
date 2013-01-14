@@ -9,7 +9,7 @@
 #include <blowgun/platform.h>
 #include <blowgun/run.h>
 
-#include "../../application/core/04-CameraMovement/camera_movement_application.h"
+#include "../../application/04-CameraMovement/camera_movement_application.h"
 
 namespace
 {
