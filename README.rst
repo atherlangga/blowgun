@@ -7,6 +7,7 @@ and Android.
 In order to achieve that, it's written using C++ and on top of OpenGLES 2.
 
 
+
 Building
 --------
 
@@ -51,6 +52,22 @@ Android
 ~~~~~~~
 
 TODO
+
+
+
+Directory Structure
+-------------------
+
+├── builder                 // Build-system-specific files.
+├── docs                    // Documentation.
+└── resources               // Raw resources.
+    ├── code                    // Code resources.
+    │   ├── application             // Application-specific code.
+    │   ├── libs                    // All library code, including Blowgun.
+    │   └── os_bootstrap            // OS-specific bootstrapper.
+    ├── data                    // Data resources.
+    └── third-party         // Third-party files needed to run the application.
+
 
 
 .. _CMake: http://cmake.org
