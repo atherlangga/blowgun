@@ -26,7 +26,7 @@ typedef std::function<void (Platform*)> MainLoopFunc;
  * - It has to check whether Platform::IsExitRequested() returns
  *   true.
  *
- * Here's an example for illustrative purpose:
+ * Here's an example for illustration purpose:
  *
  * <pre>
  * {@code
@@ -50,8 +50,13 @@ typedef std::function<void (Platform*)> MainLoopFunc;
  *          User-defined function to create the Environment.
  * @param   main_loop_func
  *          The key argument. This is the user-defined main loop
- *          function. Please see description above to know how to
+ *          function. Please see description above for how to
  *          write one.
+ * @param   platform_parameter
+ *			Platform-specific parameter. This parameter is used
+ *			to pass information to the library for specific platform.
+ *			For most platforms, this should be NULL. For Android,
+ *			though, this should contains pointer to the main Activity.
  */
 void Run(
     CreateEnvironmentFunc create_environment_func,
