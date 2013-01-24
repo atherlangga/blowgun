@@ -58,15 +58,17 @@ TODO
 Directory Structure
 -------------------
 
-├── builder                 // Build-system-specific files.
-├── docs                    // Documentation.
-└── resources               // Raw resources.
-    ├── code                    // Code resources.
-    │   ├── application             // Application-specific code.
-    │   ├── libs                    // All library code, including Blowgun.
-    │   └── os_bootstrap            // OS-specific bootstrapper.
-    ├── data                    // Data resources.
-    └── third-party         // Third-party files needed to run the application.
+::
+
+   ├── builder                 // Build-system-specific files.
+   ├── docs                    // Documentation.
+   └── resources               // Raw resources.
+       ├── code                    // Code resources.
+       │   ├── application             // Application-specific code.
+       │   ├── libs                    // All library code, including Blowgun.
+       │   └── os_bootstrap            // OS-specific bootstrapper.
+       ├── data                    // Data resources.
+       └── third-party         // Third-party files needed to run the application.
 
 
 
