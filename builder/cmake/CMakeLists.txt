@@ -231,6 +231,9 @@ endif ()
 if (target_os MATCHES "Android")
     # Copy the necessary files to create bare-mininum Android
     # application.
+    # TODO: Detect changes on the source directory so the destination
+    # will be updated automatically. The way it is now is to do it
+    # manually.
     add_copy_files_target (
         android_project_files
         ${CMAKE_CURRENT_SOURCE_DIR}/resources/code/os_bootstrap/android/
@@ -300,6 +303,7 @@ if ((target_os MATCHES "Linux") OR (target_os MATCHES "Windows"))
         "resources/code/os_bootstrap/default/*.c*")
     add_executable (os_bootstrap ${os_bootstrap_hdrs} ${os_bootstrap_srcs})
 elseif (target_os MATCHES "Android")
+    # For native Android application, it has to be a shared library
     file (GLOB_RECURSE os_bootstrap_hdrs
         "resources/code/os_bootstrap/android/*.h*")
     file (GLOB_RECURSE os_bootstrap_srcs
