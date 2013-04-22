@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <memory>
+#include <boost/any.hpp>
 
 #include "native_interface.h"
 #include "environment.h"
@@ -61,7 +62,7 @@ typedef std::function<void (Platform*)> MainLoopFunc;
 void Run(
     CreateEnvironmentFunc create_environment_func,
     MainLoopFunc          main_loop_func,
-    void*                 platform_parameter);
+    boost::any            platform_parameter);
 }
 
 #endif // BLOWGUN_RUN_H

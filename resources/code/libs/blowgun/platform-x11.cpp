@@ -45,7 +45,7 @@ private:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Platform::Platform(CreateEnvironmentFunc create_environment_func, void* param)
+Platform::Platform(CreateEnvironmentFunc create_environment_func, boost::any param)
 : impl_(new Impl(create_environment_func()))
 {
 }

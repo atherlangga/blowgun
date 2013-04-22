@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <memory>
+#include <boost/any.hpp>
 
 #include "environment.h"
 #include "run.h"
@@ -75,7 +76,7 @@ private:
      */
     explicit Platform(
         CreateEnvironmentFunc create_environment_func,
-        void*                 param);
+        boost::any            param);
 
     /**
      * Prepare the underlying platform.
@@ -98,7 +99,7 @@ private:
  * Only blowgun::Run that allowed to construct, initialize, and shutdown
  * the platform.
  */
-friend void Run(CreateEnvironmentFunc, MainLoopFunc, void*);
+friend void Run(CreateEnvironmentFunc, MainLoopFunc, boost::any);
 };
 
 }

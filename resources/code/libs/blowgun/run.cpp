@@ -1,13 +1,14 @@
 #include "run.h"
 #include "platform.h"
 
+//#include <android/log.h>
 using namespace blowgun;
 
 void
 blowgun::Run(
     CreateEnvironmentFunc create_environment_func,
     MainLoopFunc          main_loop_func,
-    void*                 platform_parameter)
+    boost::any            platform_parameter)
 {
     // Build the platform representation
     std::unique_ptr<Platform> platform(
