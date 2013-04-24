@@ -24,9 +24,10 @@ public:
     /**
      * Upload the data to GPU.
      */
-    void Upload();
+    void Upload() const;
 
 private:
+
     /**
      * The format of the vertices, which can be one
      * of two options:
