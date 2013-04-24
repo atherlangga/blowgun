@@ -145,7 +145,7 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "GNU"
     CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     # Set GCC and Clang configuration
     set (CMAKE_CXX_FLAGS
-        "-pedantic -Wall -Wextra -Weffc++ -Woverloaded-virtual -fexceptions")
+        "-pedantic -Wall -Wextra -Weffc++ -Woverloaded-virtual -fexceptions -frtti")
     set (CMAKE_CXX_FLAGS_DEBUG
         "-O0 -g")
     set (CMAKE_CXX_FLAGS_RELEASE
@@ -213,8 +213,8 @@ if (MSVC_IDE)
     #   the executable located by Visual Studio, those dlls will be
     #   waiting for it.
     # - Configure Visual Studio to put the executable on one single
-    #   location regardless of the configuration. And then copy the the
-    #   dlls onto that location.
+    #   location regardless of the configuration. And then copy the dlls
+    #   to that location.
     # The latter option is the best option. However, I don't know how
     # to achieve that with CMake :p. So, I prefer the second option for
     # the time being.
