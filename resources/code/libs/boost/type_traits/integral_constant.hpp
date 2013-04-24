@@ -21,9 +21,13 @@ struct integral_constant : public mpl::integral_c<T, val>
 {
    typedef integral_constant<T,val> type;
 };
-
+#if ((__GNUC__ * 100) + __GNUC_MINOR__) >= 406
+# pragma GCC diagnostic push
+# pragma GCC diagnostic ignored "-Weffc++"
 template<> struct integral_constant<bool,true> : public mpl::true_ 
 {
+# pragma GCC diagnostic pop
+#endif
 #if BOOST_WORKAROUND(BOOST_MSVC, < 1300)
 # pragma warning(push)
 # pragma warning(disable:4097)
@@ -33,8 +37,13 @@ template<> struct integral_constant<bool,true> : public mpl::true_
 #endif
    typedef integral_constant<bool,true> type;
 };
+#if ((__GNUC__ * 100) + __GNUC_MINOR__) >= 406
+# pragma GCC diagnostic push
+# pragma GCC diagnostic ignored "-Weffc++"
 template<> struct integral_constant<bool,false> : public mpl::false_ 
 {
+# pragma GCC diagnostic pop
+#endif
 #if BOOST_WORKAROUND(BOOST_MSVC, < 1300)
 # pragma warning(push)
 # pragma warning(disable:4097)
