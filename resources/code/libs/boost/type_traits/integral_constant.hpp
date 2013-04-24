@@ -10,6 +10,10 @@
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/integral_c.hpp>
 
+#if defined(__GNUC__)
+#pragma GCC system_header
+#endif
+
 namespace boost{
 
 #if defined(BOOST_NO_DEPENDENT_TYPES_IN_TEMPLATE_VALUE_PARAMETERS) || defined(__BORLANDC__)
@@ -21,6 +25,7 @@ struct integral_constant : public mpl::integral_c<T, val>
 {
    typedef integral_constant<T,val> type;
 };
+
 template<> struct integral_constant<bool,true> : public mpl::true_ 
 {
 #if BOOST_WORKAROUND(BOOST_MSVC, < 1300)
