@@ -32,12 +32,8 @@ public:
 	 */
 	virtual void OnDestroy() = 0;
 
-	virtual ~Application() = 0;
+	virtual ~Application() { };
 };
-
-// See http://stackoverflow.com/questions/630950/pure-virtual-destructor-in-c
-// for explanation
-inline Application::~Application() {}
 
 }
 
