@@ -6,13 +6,19 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+/*
 #include <strstream>
+*/
 #include <fstream>
 #include <sstream>
 #include <cstring>
 #include <ctime>
 #include <vector>
 #include <cstdlib>
+
+#if defined(__GNUC__)
+#pragma GCC system_header
+#endif
 
 // The following #define's will change the behaviour of this library.
 //      #define CPPLOG_FILTER_LEVEL     <level>
@@ -95,6 +101,10 @@
 
 #ifdef _WIN32
 #include "outputdebugstream.hpp"
+#endif
+
+#ifdef __ANDROID__
+#include <android/log.h>
 #endif
 
 #ifdef CPPLOG_WITH_SCRIBE_LOGGER
@@ -261,10 +271,15 @@ namespace cpplog
     struct LogData
     {
         // Constant.
+        /*
         static const size_t k_logBufferSize = 20000;
+        */
 
         // Our stream to log data to.
+        /*
         std::ostrstream stream;
+        */
+        std::ostringstream stream;
 
         // Captured data.
         unsigned int level;
@@ -281,11 +296,16 @@ namespace cpplog
 #endif
 
         // Buffer for our text.
+        /*
         char buffer[k_logBufferSize];
+        */
 
         // Constructor that initializes our stream.
         LogData(loglevel_t logLevel)
+            /*
             : stream(buffer, k_logBufferSize), level(logLevel)
+            */
+            : level(logLevel)
 #ifdef CPPLOG_SYSTEM_IDS
               , processId(0), threadId(0)
 #endif
@@ -406,9 +426,11 @@ namespace cpplog
             if( !m_flushed )
             {
                 // Check if we have a newline.
+                /*
                 char lastChar = m_logData->buffer[m_logData->stream.pcount() - 1];
                 if( lastChar != '\n' )
                     m_logData->stream << std::endl;
+                */
 
                 // Null-terminate.
                 m_logData->stream << '\0';
@@ -479,7 +501,10 @@ namespace cpplog
 
         virtual bool sendLogMessage(LogData* logData)
         {
+            /*
             m_logStream << logData->buffer;
+            */
+            m_logStream << logData->stream.str();
             m_logStream << std::flush;
 
             return true;
@@ -527,6 +552,51 @@ namespace cpplog
     public:
         OutputDebugStringLogger() : OstreamLogger(m_stream)
         { }
+    };
+#endif
+
+#ifdef __ANDROID__
+    // Wrapper for __android_log_print
+    class AndroidLogPrintLogger : public BaseLogger
+    {
+    private:
+        std::string m_tag;
+    public:
+        AndroidLogPrintLogger(std::string tag) : m_tag(tag)
+        { }
+
+        virtual bool sendLogMessage(LogData* logData)
+        {
+            int prio = ANDROID_LOG_DEFAULT;
+            int logLevel = logData->level;
+
+            switch(logLevel)
+            {
+                case LL_TRACE:
+                    prio = ANDROID_LOG_VERBOSE;
+                    break;
+                case LL_DEBUG:
+                    prio = ANDROID_LOG_DEBUG;
+                    break;
+                case LL_INFO:
+                    prio = ANDROID_LOG_INFO;
+                    break;
+                case LL_WARN:
+                    prio = ANDROID_LOG_WARN;
+                    break;
+                case LL_ERROR:
+                    prio = ANDROID_LOG_ERROR;
+                    break;
+                case LL_FATAL:
+                    prio = ANDROID_LOG_FATAL;
+                    break;
+                default:
+                    prio = ANDROID_LOG_DEFAULT;
+                    break;
+            }
+            __android_log_print(prio, m_tag.c_str(), "%s", (const char*) logData->buffer);
+            return true;
+        }
     };
 #endif
 
