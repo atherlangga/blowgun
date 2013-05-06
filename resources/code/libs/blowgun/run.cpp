@@ -1,7 +1,6 @@
 #include "run.h"
 #include "platform.h"
 
-//#include <android/log.h>
 using namespace blowgun;
 
 void
