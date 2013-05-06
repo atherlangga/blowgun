@@ -19,6 +19,10 @@
 #include <boost/throw_exception.hpp>
 #include <boost/static_assert.hpp>
 
+#if defined(__GNUC__)
+#pragma GCC system_header
+#endif
+
 // See boost/python/type_id.hpp
 // TODO: add BOOST_TYPEID_COMPARE_BY_NAME to config.hpp
 # if (defined(__GNUC__) && __GNUC__ >= 3) \
