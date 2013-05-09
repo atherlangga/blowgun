@@ -15,7 +15,11 @@ namespace blowgun
 class LogBackendCpplog : public LogBackend
 {
 public:
+	LogBackendCpplog(std::shared_ptr<cpplog::BaseLogger> logger);
 	void LogImpl(LogLevel level, std::string message);
+
+private:
+	const std::shared_ptr<cpplog::BaseLogger> logger_;
 };
 
 }
