@@ -44,11 +44,10 @@ namespace
 }
 
 bool
-ImageLoaderTGA::CanLoad(std::istream & input) const
+ImageLoaderTGA::CanLoad(std::istream & /*input*/) const
 {
 	// TODO: Read the header of the input stream to ensure
 	// that the stream conforms to TGA spec.
-	(void (input));
 	return true;
 }
 
