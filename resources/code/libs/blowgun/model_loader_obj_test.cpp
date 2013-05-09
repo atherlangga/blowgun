@@ -10,13 +10,13 @@ using namespace blowgun;
 TEST(ModelLoaderOBJTest, ParseSimpleObj)
 {
     const char simpleObjCString[] =
-        "v  -0.4000 -0.4000 0.0000\n"
-        "v  0.4000 -0.4000 0.0000\n"
-        "v  0.0000 0.4000 0.0000\n"
-        "vt 0.6119 0.8867 0.0000\n"
-        "vt 0.6384 0.9396 0.0000\n"
-        "vt 0.5803 0.9503 0.0000\n"
-        "f 1/1 2/2 3/3\n";
+        "v  -0.4000 -0.4000  0.0000\n"
+        "v   0.4000 -0.4000  0.0000\n"
+        "v   0.0000  0.4000  0.0000\n"
+        "vt  0.6119  0.8867  0.0000\n"
+        "vt  0.6384  0.9396  0.0000\n"
+        "vt  0.5803  0.9503  0.0000\n"
+        "f   1/1  2/2  3/3\n";
 
     const std::string simpleObjString(simpleObjCString);
     std::stringstream simpleObjStream(simpleObjString, std::ios::in);
