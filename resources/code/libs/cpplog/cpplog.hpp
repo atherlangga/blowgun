@@ -594,7 +594,7 @@ namespace cpplog
                     prio = ANDROID_LOG_DEFAULT;
                     break;
             }
-            __android_log_print(prio, m_tag.c_str(), "%s", (const char*) logData->buffer);
+            __android_log_print(prio, m_tag.c_str(), "%s", (const char*) logData->stream.str().c_str());
             return true;
         }
     };
