@@ -9,6 +9,8 @@
 
 #include <EGL/egl.h>
 
+#include <boost/any.hpp>
+
 #include <Windows.h>
 
 #include "types.h"
@@ -44,7 +46,7 @@ private:
 
 Platform::Platform(
 	CreateEnvironmentFunc create_environment_func,
-	void*                 param)
+	boost::any            /*param*/)
 : impl_(new Impl(create_environment_func()))
 {
 }

@@ -263,6 +263,11 @@ file (GLOB_RECURSE blowgun_hdrs "resources/code/libs/blowgun/*.h*")
 file (GLOB_RECURSE blowgun_srcs "resources/code/libs/blowgun/*.c*")
 add_library (blowgun ${blowgun_hdrs} ${blowgun_srcs})
 
+if (MSVC)
+    # Set maximum variadic templates to 10, as suggested by C++ standard.
+    add_definitions (-D_VARIADIC_MAX=10)
+endif ()
+
 file (GLOB_RECURSE blowgun_files "resources/code/libs/blowgun/*")
 generate_project (
     "${CMAKE_CURRENT_SOURCE_DIR}/resources/code/libs/blowgun"
