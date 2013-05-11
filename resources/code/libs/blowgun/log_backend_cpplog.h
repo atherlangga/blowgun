@@ -3,6 +3,10 @@
 
 #include "log.h"
 
+#ifdef _WIN32
+#define NOGDI
+#endif
+
 #include <cpplog/cpplog.hpp>
 
 namespace blowgun
@@ -16,7 +20,8 @@ class LogBackendCpplog : public LogBackend
 {
 public:
 	LogBackendCpplog(std::shared_ptr<cpplog::BaseLogger> logger);
-	void LogImpl(LogLevel level, std::string message);
+	void LogImpl(LogLevel level, std::string fileName,
+		unsigned int lineNumber, std::string message);
 
 private:
 	const std::shared_ptr<cpplog::BaseLogger> logger_;

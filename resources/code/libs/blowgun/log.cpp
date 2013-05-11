@@ -9,7 +9,13 @@ using namespace blowgun;
 void
 blowgun::Log(LogLevel level, std::string message)
 {
-	LogProxy::Instance()->Log(level, message);
+	blowgun::Log(level, "", 0, message);
+}
+
+void
+blowgun::Log(LogLevel level, std::string fileName, unsigned int lineNumber, std::string message)
+{
+	LogProxy::Instance()->Log(level, fileName, lineNumber, message);
 }
 
 void
@@ -23,6 +29,7 @@ blowgun::SetLogBackend(std::shared_ptr<LogBackend> backend)
 std::unique_ptr<LogProxy> LogProxy::instance_ = nullptr;
 
 LogProxy::LogProxy()
+: backend_(std::make_shared<LogBackendNull>())
 {
 }
 
@@ -49,7 +56,7 @@ LogProxy::SetLogBackend(std::shared_ptr<LogBackend> backend)
 }
 
 void
-LogProxy::Log(LogLevel level, std::string message)
+LogProxy::Log(LogLevel level, std::string fileName, unsigned int lineNumber, std::string message)
 {
-	backend_->LogImpl(level, message);
+	backend_->LogImpl(level, fileName, lineNumber, message);
 }

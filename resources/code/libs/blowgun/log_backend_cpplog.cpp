@@ -6,15 +6,19 @@ using namespace cpplog;
 
 static int TranslateLogLevel(LogLevel level);
 
-LogBackendCpplog::LogBackendCpplog(std::shared_ptr<cpplog::BaseLogger> logger)
+LogBackendCpplog::LogBackendCpplog(
+	std::shared_ptr<cpplog::BaseLogger> logger)
 : logger_(logger)
 {
 }
 
-void LogBackendCpplog::LogImpl(LogLevel level, std::string message)
+void
+LogBackendCpplog::LogImpl(LogLevel level, std::string fileName,
+	unsigned int lineNumber, std::string message)
 {
 	int cpplogLevel = TranslateLogLevel(level);
-	LOG_LEVEL(cpplogLevel, logger_.get()) << message;
+	cpplog::LogMessage(fileName.c_str(), lineNumber,
+		cpplogLevel, logger_.get()).getStream() << message;
 }
 
 static int TranslateLogLevel(LogLevel level)

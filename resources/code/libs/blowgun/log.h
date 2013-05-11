@@ -4,6 +4,8 @@
 #include <string>
 #include <memory>
 
+#define BLOG(level, message) blowgun::Log((level), __FILE__, __LINE__, message)
+
 namespace blowgun
 {
 
@@ -14,6 +16,8 @@ enum class LogLevel;
  * Log a message with specified level.
  */
 void Log(LogLevel level, std::string message);
+
+void Log(LogLevel level, std::string fileName, unsigned int lineNumber, std::string message);
 
 // Forward declaration for `SetLogBackend`.
 class LogBackend;
@@ -41,7 +45,7 @@ enum class LogLevel
 class LogProxy
 {
 private:
-	void Log(LogLevel level, std::string message);
+	void Log(LogLevel level, std::string fileName, unsigned int lineNumber, std::string message);
 	void SetLogBackend(std::shared_ptr<LogBackend> backend);
 	
 	explicit LogProxy();
@@ -57,7 +61,7 @@ private:
 
 	std::shared_ptr<LogBackend> backend_;
 
-friend void Log(LogLevel level, std::string message);
+friend void Log(LogLevel level, std::string fileName, unsigned int lineNumber, std::string message);
 friend void SetLogBackend(std::shared_ptr<LogBackend> backend);
 };
 
@@ -67,7 +71,7 @@ friend void SetLogBackend(std::shared_ptr<LogBackend> backend);
 class LogBackend
 {
 public:
-	virtual void LogImpl(LogLevel level, std::string message) = 0;
+	virtual void LogImpl(LogLevel level, std::string fileName, unsigned int lineNumber, std::string message) = 0;
 	virtual ~LogBackend() {}
 };
 
@@ -77,7 +81,7 @@ public:
 class LogBackendNull : public LogBackend
 {
 public:
-	void LogImpl(LogLevel /*level*/, std::string /*message*/) { };
+	void LogImpl(LogLevel /*level*/, std::string /*fileName*/, unsigned int /*lineNumber*/, std::string /*message*/) { };
 };
 
 }
