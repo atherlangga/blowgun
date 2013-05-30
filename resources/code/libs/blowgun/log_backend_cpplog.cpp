@@ -5,6 +5,7 @@ using namespace blowgun;
 using namespace cpplog;
 
 static int TranslateLogLevel(LogLevel level);
+static std::vector<std::string> SplitIntoLines(std::string message);
 
 LogBackendCpplog::LogBackendCpplog(
 	std::shared_ptr<cpplog::BaseLogger> logger)
@@ -17,8 +18,12 @@ LogBackendCpplog::LogImpl(LogLevel level, std::string fileName,
 	unsigned int lineNumber, std::string message)
 {
 	int cpplogLevel = TranslateLogLevel(level);
-	cpplog::LogMessage(fileName.c_str(), lineNumber,
-		cpplogLevel, logger_.get()).getStream() << message;
+
+	for (auto m : SplitIntoLines(message))
+	{
+		cpplog::LogMessage(fileName.c_str(), lineNumber,
+			cpplogLevel, logger_.get()).getStream() << message << std::endl;
+	}
 }
 
 static int TranslateLogLevel(LogLevel level)
@@ -44,5 +49,20 @@ static int TranslateLogLevel(LogLevel level)
 		default:
 			break;
 	}
+	return result;
+}
+
+static std::vector<std::string> SplitIntoLines(std::string message)
+{
+	std::stringstream stream(message);
+	std::vector<std::string> result;
+
+	while(stream.good())
+	{
+		std::string line;
+		std::getline(stream, line);
+		result.push_back(line);
+	}
+
 	return result;
 }
