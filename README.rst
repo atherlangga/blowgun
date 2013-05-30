@@ -2,8 +2,7 @@
 Blowgun
 =======
 
-Blowgun is a 3D graphics library that designed to run on Windows, Linux,
-and Android.
+Blowgun is a 3D graphics library that designed to run on Windows, Linux,and Android.
 In order to achieve that, it's written using C++ and on top of OpenGLES 2.
 
 
@@ -20,12 +19,12 @@ Basically, Blowgun only needs two things:
 Windows
 ~~~~~~~
 
-On Windows, Blowgun is tested working using MSVC 10.0
-(Shipped with Visual C++ 2010).
+On Windows, Blowgun is tested working using MSVC 11.0
+(Shipped with Visual C++ Express 2012 for Windows Desktop).
 
 Steps to build:
 
-1. Open command prompt and then change directory to ``builder\cmake``.
+1. Open Visual Studio Command Prompt and then change directory to ``builder\cmake``.
 2. Make directory junction for ``resources``.
    You can do that using command ``mklink /d /j resources ..\..\resources``.
 3. Run ``cmake . && make``.
