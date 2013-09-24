@@ -32,14 +32,14 @@ typedef std::function<void (Platform*)> MainLoopFunc;
  * <pre>
  * {@code
  *
- *     DoTheInitialization();
+ *     DoApplicationInitialization();
  *
  *     // Start the magic.
- *     while (!platform->IsExitRequested)
+ *     while (!platform->IsExitRequested())
  *     {
  *         platform->OnPreFrame();
  *
- *         DoAwesomeStuffs();
+ *         DoApplicationSpecificStuffs();
  *
  *         platform->OnPostFrame();
  *     }
