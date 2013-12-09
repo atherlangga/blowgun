@@ -15,7 +15,7 @@ LogBackendCpplog::LogBackendCpplog(
 
 void
 LogBackendCpplog::LogImpl(LogLevel level, std::string fileName,
-	unsigned int lineNumber, std::string message)
+	u32 lineNumber, std::string message)
 {
 	int cpplogLevel = TranslateLogLevel(level);
 

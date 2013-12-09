@@ -3,7 +3,10 @@
 
 #include "log.h"
 
-#ifdef _WIN32
+#include "platform_id.h"
+#include "types.h"
+
+#if (PLATFORM_ID == PLATFORM_WINDOWS)
 #define NOGDI
 #endif
 
@@ -21,7 +24,7 @@ class LogBackendCpplog : public LogBackend
 public:
 	LogBackendCpplog(std::shared_ptr<cpplog::BaseLogger> logger);
 	void LogImpl(LogLevel level, std::string fileName,
-		unsigned int lineNumber, std::string message);
+		u32 lineNumber, std::string message);
 
 private:
 	const std::shared_ptr<cpplog::BaseLogger> logger_;
