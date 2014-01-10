@@ -2,7 +2,7 @@
 Blowgun
 =======
 
-Blowgun is a 3D graphics library that designed to run on Windows, Linux,and Android.
+Blowgun is a 3D graphics library that designed to run on Windows, Linux, and Android.
 In order to achieve that, it's written using C++ and on top of OpenGLES 2.
 
 
